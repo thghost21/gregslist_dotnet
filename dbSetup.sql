@@ -49,3 +49,6 @@ accounts.*
 FROM cars
 INNER JOIN accounts ON accounts.id = cars.creator_id
 WHERE cars.id = 3;
+
+
+UPDATE cars SET make = "mazda", model = "miata" WHERE id = 5 LIMIT 1;

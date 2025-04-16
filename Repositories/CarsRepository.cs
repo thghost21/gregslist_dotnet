@@ -86,7 +86,33 @@ public class CarsRepository
 
     if (rowsAffected > 1)
     {
-      throw new Exception(rowsAffected + " WERE DELETED AND THAT IS REALLY BAD. CALL JAKE!!!!!");
+      throw new Exception(rowsAffected + " ROWS WERE DELETED AND THAT IS REALLY BAD. CALL JAKE!!!!!");
+    }
+  }
+
+  internal void UpdateCar(Car car)
+  {
+    string sql = @"
+    UPDATE cars
+    SET
+    make = @Make,
+    model = @Model,
+    price = @Price,
+    img_url = @ImgUrl,
+    has_clean_title = @HasCleanTitle
+    WHERE id = @Id
+    LIMIT 1;";
+
+    int rowsAffected = _db.Execute(sql, car);
+
+    if (rowsAffected == 0)
+    {
+      throw new Exception("NO ROWS WERE UPDATED");
+    }
+
+    if (rowsAffected > 1)
+    {
+      throw new Exception(rowsAffected + " ROWS WERE UPDATED AND THAT IS REALLY BAD. CALL JAKE!!!!!");
     }
   }
 }

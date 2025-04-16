@@ -46,4 +46,25 @@ public class CarsService
 
     return $"Your {car.Make} {car.Model} has been deleted!";
   }
+
+  internal Car UpdateCar(int carId, Car carUpdateData, Account userInfo)
+  {
+    Car car = GetCarById(carId);
+
+    if (car.CreatorId != userInfo.Id)
+    {
+      throw new Exception($"YOU ARE NOT ALLOWED TO UPDATE SOMEONE ELSE'S CAR, {userInfo.Name.ToUpper()}!");
+    }
+
+    car.Make = carUpdateData.Make ?? car.Make;
+    car.Model = carUpdateData.Model ?? car.Model;
+    // NOTE will only work if the int value is nullable in your model
+    car.Price = carUpdateData.Price ?? car.Price;
+    car.ImgUrl = carUpdateData.ImgUrl ?? car.ImgUrl;
+    car.HasCleanTitle = carUpdateData.HasCleanTitle ?? car.HasCleanTitle;
+
+    _carsRepository.UpdateCar(car);
+
+    return car;
+  }
 }
