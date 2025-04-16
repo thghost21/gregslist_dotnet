@@ -1,5 +1,6 @@
 
 
+
 namespace gregslist_dotnet.Repositories;
 
 public class CarsRepository
@@ -40,11 +41,34 @@ public class CarsRepository
     INNER JOIN accounts ON accounts.id = cars.creator_id
     WHERE cars.id = @carId;";
 
-    Car car = _db.Query(sql, (Car car, Account account) =>
+    Car foundCar = _db.Query(sql, (Car car, Account account) =>
     {
       car.Creator = account;
       return car;
     }, new { carId }).SingleOrDefault();
-    return car;
+    return foundCar;
+  }
+
+  internal Car CreateCar(Car carData)
+  {
+    string sql = @"
+    INSERT INTO 
+    cars (make, model, year, price, color, mileage, engine_type, img_url, has_clean_title, creator_id)
+    VALUES (@Make, @Model, @Year, @Price, @Color, @Mileage, @EngineType, @ImgUrl, @HasCleanTitle, @CreatorId);
+    
+    SELECT
+    cars.*,
+    accounts.*
+    FROM cars
+    INNER JOIN accounts ON accounts.id = cars.creator_id 
+    WHERE cars.id = LAST_INSERT_ID();";
+
+    Car createdCar = _db.Query(sql, (Car car, Account account) =>
+    {
+      car.Creator = account;
+      return car;
+    }, carData).SingleOrDefault();
+
+    return createdCar;
   }
 }
