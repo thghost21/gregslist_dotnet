@@ -16,4 +16,14 @@ public class HousesService
     List<House> houses = _housesRepository.GetAllHouses();
     return houses;
   }
+
+  internal House GetHouseByID(int houseId)
+  {
+    House house = _housesRepository.GetHouseById(houseId);
+    if (house == null)
+    {
+      throw new Exception($"No house with the Id of {houseId}");
+    }
+    return house;
+  }
 }
