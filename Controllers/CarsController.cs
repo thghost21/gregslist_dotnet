@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 namespace gregslist_dotnet.Controllers;
 
 // NOTE cs:api_controller
@@ -46,8 +48,8 @@ public class CarsController : ControllerBase
   }
 
 
-  [HttpPost]
   [Authorize]
+  [HttpPost]
   public async Task<ActionResult<Car>> CreateCar([FromBody] Car carData)
   {
     try
@@ -56,6 +58,22 @@ public class CarsController : ControllerBase
       carData.CreatorId = userInfo.Id;
       Car car = _carsService.CreateCar(carData);
       return Ok(car);
+    }
+    catch (Exception exception)
+    {
+      return BadRequest(exception.Message);
+    }
+  }
+
+  [Authorize]
+  [HttpDelete("{carId}")]
+  public async Task<ActionResult<string>> DeleteCar(int carId)
+  {
+    try
+    {
+      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+      string message = _carsService.DeleteCar(carId, userInfo);
+      return Ok(message);
     }
     catch (Exception exception)
     {

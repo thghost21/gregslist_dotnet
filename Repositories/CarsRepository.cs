@@ -1,6 +1,7 @@
 
 
 
+
 namespace gregslist_dotnet.Repositories;
 
 public class CarsRepository
@@ -70,5 +71,22 @@ public class CarsRepository
     }, carData).SingleOrDefault();
 
     return createdCar;
+  }
+
+  internal void DeleteCar(int carId)
+  {
+    string sql = "DELETE FROM cars WHERE id = @carId LIMIT 1;";
+
+    int rowsAffected = _db.Execute(sql, new { carId });
+
+    if (rowsAffected == 0)
+    {
+      throw new Exception("NO ROWS WERE DELETED");
+    }
+
+    if (rowsAffected > 1)
+    {
+      throw new Exception(rowsAffected + " WERE DELETED AND THAT IS REALLY BAD. CALL JAKE!!!!!");
+    }
   }
 }

@@ -32,4 +32,18 @@ public class CarsService
     Car car = _carsRepository.CreateCar(carData);
     return car;
   }
+
+  internal string DeleteCar(int carId, Account userInfo)
+  {
+    Car car = GetCarById(carId);
+
+    if (car.CreatorId != userInfo.Id)
+    {
+      throw new Exception($"YOU ARE NOT ALLOWED TO DELETE SOMEONE ELSE'S CAR, {userInfo.Name.ToUpper()}!");
+    }
+
+    _carsRepository.DeleteCar(carId);
+
+    return $"Your {car.Make} {car.Model} has been deleted!";
+  }
 }
