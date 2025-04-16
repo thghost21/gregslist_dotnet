@@ -33,12 +33,18 @@ CREATE TABLE houses(
   sqft INT NOT NULL,
   bedrooms INT NOT NULL,
   bathrooms DOUBLE NOT NULL,
-  imgUrl VARCHAR(255) NOT NULL,
+  img_url VARCHAR(255) NOT NULL,
   description VARCHAR(255) NOT NULL,
   price INT NOT NULL,
-  createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
-  updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update'
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  creator_id VARCHAR(255) NOT NULL
 );
+INSERT INTO
+houses (sqft, bedrooms, bathrooms, img_url, description, price, creator_id)
+VALUES(1500, 3, 1, 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aG91c2V8ZW58MHx8MHx8fDA%3D','its a nice house man', 300000, '67d2089c864394d508a2e2dc');
+
+
 
 INSERT INTO 
 cars (make, model, year, price, color, mileage, engine_type, img_url, has_clean_title, creator_id)
@@ -61,7 +67,7 @@ FROM cars
 INNER JOIN accounts ON accounts.id = cars.creator_id
 WHERE cars.id = 3;
 
-
+DROP TABLE houses;
 UPDATE cars SET make = "mazda", model = "miata" WHERE id = 5 LIMIT 1;
 
 SELECT * FROM houses;

@@ -19,5 +19,8 @@
     "titleBar.inactiveForeground": "#15202b99",
     "editorGroup.border": "#81f12f"
   },
-  "peacock.color": "#67de0f"
+  "peacock.color": "#67de0f",
+  "cSpell.words": [
+    "gregslist"
+  ]
 }
