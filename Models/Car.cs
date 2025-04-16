@@ -16,4 +16,5 @@ public class Car
   public string ImgUrl { get; set; }
   public bool HasCleanTitle { get; set; }
   public string CreatorId { get; set; }
+  public Account Creator { get; set; }
 }

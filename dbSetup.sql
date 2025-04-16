@@ -36,3 +36,9 @@ VALUES ('honda', 's2000', 2008, 20000, 'silver', 200000, 'medium', 'https://imag
 SELECT * FROM accounts;
 
 SELECT * FROM cars;
+
+SELECT 
+cars.*,
+accounts.*
+FROM cars
+INNER JOIN accounts ON accounts.id = cars.creator_id;
