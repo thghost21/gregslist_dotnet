@@ -63,3 +63,5 @@ WHERE cars.id = 3;
 
 
 UPDATE cars SET make = "mazda", model = "miata" WHERE id = 5 LIMIT 1;
+
+SELECT * FROM houses;
