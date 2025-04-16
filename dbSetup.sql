@@ -31,10 +31,8 @@ CREATE TABLE cars(
 
 INSERT INTO 
 cars (make, model, year, price, color, mileage, engine_type, img_url, has_clean_title, creator_id)
-VALUES ('mazda', 'miata', 1996, 6000, 'black', 200000, 'small', 'https://images.unsplash.com/photo-1732604226180-9f050e35f7c5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fG14NXxlbnwwfHwwfHx8MA%3D%3D', true, '65f87bc1e02f1ee243874743');
+VALUES ('honda', 's2000', 2008, 20000, 'silver', 200000, 'medium', 'https://images.unsplash.com/photo-1723407338018-709fbf9ed494?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHMyMDAwfGVufDB8fDB8fHww', false, '670ff93326693293c631476f');
 
 SELECT * FROM accounts;
 
 SELECT * FROM cars;
-
-DELETE FROM accounts WHERE id = '670ff93326693293c631476f';
