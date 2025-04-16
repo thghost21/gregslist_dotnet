@@ -42,3 +42,10 @@ cars.*,
 accounts.*
 FROM cars
 INNER JOIN accounts ON accounts.id = cars.creator_id;
+
+SELECT 
+cars.*,
+accounts.*
+FROM cars
+INNER JOIN accounts ON accounts.id = cars.creator_id
+WHERE cars.id = 3;
